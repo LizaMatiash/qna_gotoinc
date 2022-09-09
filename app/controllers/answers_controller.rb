@@ -24,4 +24,5 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:body)
 
   end
+
 end
