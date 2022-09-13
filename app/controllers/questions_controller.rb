@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(questions_params)
     @question.user_id = current_user.id
     if @question.save
-      redirect_to @question
+      redirect_to @question, notice: 'Your question successfully created.'
     else
       render :new
     end
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   def update
     @question.update(questions_params)
     if @question.save
-      redirect_to @question
+      redirect_to @question, notice: 'Your question successfully updated.'
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    redirect_to questions_path
+    redirect_to questions_path, notice: 'Your question successfully destroyed.'
   end
 
   protected
