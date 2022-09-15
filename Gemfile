@@ -28,6 +28,8 @@ gem 'slim-rails'
 
 gem 'devise'
 
+gem 'jquery-rails'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -37,6 +39,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'database_cleaner'
 end
 
 group :development do
