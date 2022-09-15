@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'feature_helper'
 
 feature 'User can see list of questions', %q{
 In order to get answer from a community

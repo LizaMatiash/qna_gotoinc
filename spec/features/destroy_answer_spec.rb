@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'feature_helper'
 
 feature 'User can destroy your answer for question', %q{
 In order to get answer for a community
