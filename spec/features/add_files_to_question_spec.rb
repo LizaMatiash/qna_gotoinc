@@ -20,7 +20,7 @@ feature 'Add files to question', %(
 
     click_on 'Create'
 
-    expect(page).to have_content 'rails_helper.rb'
+    expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
   end
 
 
