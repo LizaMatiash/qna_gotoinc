@@ -14,7 +14,7 @@ feature 'Add files to answer', %(
     click_on question.body
   end
 
-  scenario 'Authenticated user creates answer' do
+  scenario 'Authenticated user creates answer', js: true do
     fill_in 'Body', with: 'My answer'
     attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
     click_on 'Add answer'

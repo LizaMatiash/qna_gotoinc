@@ -12,7 +12,7 @@ feature 'Add files to question', %(
     visit new_question_path
   end
 
-  scenario 'Authenticated user creates question' do
+  scenario 'Authenticated user creates question', js: true do
 
     fill_in 'Title', with: 'Test title'
     fill_in 'Body', with: 'Test body'

@@ -15,9 +15,13 @@
 
 .new-answer
   = form_for [@question, @answer], class: 'new-answer', remote: true do |f|
-         = f.label :body
-         = f.text_area :body
-         = f.submit 'Add answer'
+    p
+      = f.label :body
+      = f.text_area :body
+    p
+      = f.fields_for :attachments do |a|
+        = link_to_add_association 'add', f , :attachments
+    p= f.submit 'Add answer'
 .question
   - if @question.user == current_user
     p= link_to 'Destroy', @question, method: :delete, local: true

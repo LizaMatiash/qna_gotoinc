@@ -18,6 +18,11 @@
 div class = "answer-#{answer.id}"
   - if answer.persisted?
     li= answer.body
+    - answer.attachments.each do |a|
+      div class = "file-#{a.id}"
+      li= link_to a.file.identifier, a.file.url
+      - if answer.user == current_user
+        li= link_to 'Destroy file', attachment_path(a), method: :delete, remote: true
     - if answer.user == current_user
       p= link_to 'Destroy', answer, method: :delete, local: true
       p= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
