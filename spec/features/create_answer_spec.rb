@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'feature_helper'
 feature 'User can add answer for question', %q{
 In order to get answer for a community
 As an authenticated user
@@ -15,17 +15,17 @@ I'd like to be able to add answer for question
     end
 
     scenario 'add answer for the question', js: true do
-      fill_in 'Body', with: 'My answer'
+      fill_in 'Body', with: 'My answer1'
       click_on 'Add answer'
 
-      expect(page).to have_content 'My answer'
+      expect(page).to have_content 'My answer1'
     end
 
-    # scenario 'add answer with error', js: true do
-    #     click_on 'Add answer'
-    #
-    #     expect(page).to have_content "Body can't be blank"
-    #   end
+    scenario 'add answer with error', js: true do
+        click_on 'Add answer'
+
+        expect(page).to have_content "Body can't be blank"
+      end
   end
 
    describe 'Unauthenticated user' do
@@ -35,7 +35,7 @@ I'd like to be able to add answer for question
     end
 
     scenario 'add answer for the question' do
-          fill_in 'Body', with: 'My answer'
+          fill_in 'Body', with: 'My answer1'
           click_on 'Add answer'
 
           expect(page).to have_content 'You need to sign in or sign up before continuing.'

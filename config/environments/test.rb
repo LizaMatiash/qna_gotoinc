@@ -52,6 +52,8 @@ Rails.application.configure do
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
+  config.action_view.preload_links_header = false
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

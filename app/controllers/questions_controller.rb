@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answers = @question.answers
+    @answers = @answers.order(position: :asc)
     @answer = Answer.new
   end
 
@@ -31,11 +32,6 @@ class QuestionsController < ApplicationController
 
   def update
     @question.update(questions_params)
-    if @question.save
-      redirect_to @question, notice: 'Your question successfully updated.'
-    else
-      render :edit
-    end
   end
 
   def destroy
