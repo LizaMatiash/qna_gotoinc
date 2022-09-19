@@ -3,6 +3,14 @@
 
 = render @question
 
+.question_vote
+    p class = "rating"
+      = "Rating: #{ @question.rating() }"
+    p class = 'rating-error'
+    p= link_to 'vote_up', votes_up_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
+    p= link_to 'vote_down', votes_down_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
+    p= link_to 'vote_cancel', votes_cancel_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'cancel-vote', data: { type: :json }
+
 
 .answers
   ul

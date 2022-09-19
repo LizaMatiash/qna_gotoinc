@@ -6,6 +6,10 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.position = 2
     @answer.save
+
+    # respond_to do |format|
+    #   format.html { render partial: @answer, layout: false }
+    # end
   end
 
   def update

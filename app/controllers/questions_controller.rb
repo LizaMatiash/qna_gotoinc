@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
     @answers = @question.answers
     @answers = @answers.order(position: :asc)
     @answer = Answer.new
+    @vote = Vote.new
     @answer.attachments.build
   end
 
