@@ -1,23 +1,21 @@
-/div class = "answer-#{answer.id}"
-/  - if answer.persisted?
-/    div class = "answer#{@number}"
-/      p= "Answer #{@number}"
-/      - @number += 1
-/      p= answer.body
-/      - if current_user&.author_of?(answer)
-/        p= link_to 'Destroy', answer, method: :delete, local: true
-/        p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
-/      - if current_user&.author_of?(answer.question)
-/        p= link_to 'The Best', best_answer_path(answer), class: 'best-answer-link', data: { answer_id: answer.id }, remote: true
-/
-/  = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" } do |f|
-/    = f.label :body, 'Your answer'
-/    = f.text_area :body
-/    = f.submit 'Save', class: 'save-answer-link', data: { answer_id: answer.id }
-
 div class = "answer-#{answer.id}"
   - if answer.persisted?
     li= answer.body
+
+    - answer.attachments.each do |a|
+      div class = "file-#{a.id}"
+        li= link_to a.file.identifier, a.file.url
+        - if answer.user == current_user
+          li= link_to 'Destroy file', attachment_path(a), method: :delete, remote: true, class: 'destroy-file', data: { file_id: a.id }
+
+    .answer_vote
+      p class = "rating"
+        = "Rating: #{ answer.rating() }"
+      p class = 'rating-error'
+      p= link_to 'vote_up', votes_up_url(id: answer.id, type: 'answer'), method: :post, remote: true, class: 'new-vote', data: { type: :json }, data: { answer_id: answer.id }
+      p= link_to 'vote_down', votes_down_url(id: answer.id, type: 'answer'), method: :post, remote: true, class: 'new-vote', data: { type: :json }, data: { answer_id: answer.id }
+      p= link_to 'vote_cancel', votes_cancel_url(id: answer.id, type: 'answer'), method: :post, remote: true, class: 'cancel-vote', data: { type: :json }, data: { answer_id: answer.id }
+
     - if answer.user == current_user
       p= link_to 'Destroy', answer, method: :delete, local: true
       p= link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
@@ -26,5 +24,7 @@ div class = "answer-#{answer.id}"
              = f.label :body, "Answer"
              = f.text_area :body
              = f.submit 'Save', class: 'save-answer-link', data: { answer_id: answer.id }
+
+
   - if @question.user == current_user && answer.position != 1
     p= link_to 'Best', position_answer_path(answer), class: 'best-answer-link', data: { answer_id: answer.id }, remote: true

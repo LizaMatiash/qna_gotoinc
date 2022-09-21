@@ -8,8 +8,9 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 require("jquery")
+require("@nathanvda/cocoon")
 require("answers")
-// require("jquery_ujs")s
+// require("jquery_ujs")
 // import "jquery_ujs"
 
 Rails.start()

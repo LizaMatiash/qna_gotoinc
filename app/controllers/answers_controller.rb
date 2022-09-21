@@ -6,6 +6,10 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.position = 2
     @answer.save
+
+    # respond_to do |format|
+    #   format.html { render partial: @answer, layout: false }
+    # end
   end
 
   def update
@@ -45,7 +49,7 @@ class AnswersController < ApplicationController
 
   private
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, attachments_attributes: [:file])
 
   end
 

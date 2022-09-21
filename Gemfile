@@ -30,6 +30,9 @@ gem 'devise'
 
 gem 'jquery-rails'
 
+gem 'carrierwave'
+gem "cocoon"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

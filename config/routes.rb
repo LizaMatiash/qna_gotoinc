@@ -9,6 +9,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :attachments, only: [:destroy]
+  post '/votes/votes_down', to: 'votes#votes_down', as: 'votes_down'
+  post '/votes/votes_up', to: 'votes#votes_up', as: 'votes_up'
+  post '/votes/votes_cancel', to: 'votes#votes_cancel', as: 'votes_cancel'
+
   root to: "questions#index"
 
 end
