@@ -6,12 +6,14 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
+import * as ActionCable from "@rails/actioncable"
 import "channels"
 require("jquery")
 require("@nathanvda/cocoon")
 require("answers")
-// require("jquery_ujs")
-// import "jquery_ujs"
+// require("handlebars")
+
+
 
 Rails.start()
 Turbolinks.start()

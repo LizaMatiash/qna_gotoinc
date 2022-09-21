@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit update destroy create]
   before_action :load_question, only: %i[show edit update destroy]
 
+  after_action :publish_question, only: [:create]
+
   def index
     @questions = Question.all
   end
@@ -10,8 +12,10 @@ class QuestionsController < ApplicationController
     @answers = @question.answers
     @answers = @answers.order(position: :asc)
     @answer = Answer.new
+    @comment = @answer.comments.new
     @vote = Vote.new
     @answer.attachments.build
+
   end
 
   def new
@@ -48,8 +52,17 @@ class QuestionsController < ApplicationController
 
   protected
 
+  def publish_question
+    return if @question.errors.any?
+    ActionCable.server.broadcast 'questions',
+     { id: @question.id, title: @question.title, body: @question.body }
+  end
+
   def load_question
     @question = Question.find(params[:id])
+    gon.question_id = @question.id
+    gon.user_id = current_user.id if current_user
+    gon.question_owner_id = @question.user_id
   end
 
   def questions_params

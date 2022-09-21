@@ -3,7 +3,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
   has_many :attachments, as: :attachmentable
-  # has_many :votes, dependent: :destroy, as: :votable
+  has_many :comments, dependent: :destroy, as: :commentable
 
   validates :body, presence: true
 

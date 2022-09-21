@@ -1,8 +1,13 @@
-ul
-  - @questions.each do |question|
-    li
-      h2= question.title
-      li= link_to "#{question.body}", question_path(question)
+.question-list
+  ul
+    - @questions.each do |question|
+      li
+        = render 'questions/index', question: question
+
+        /'questions/index', question
+
+        /h2= question.title
+        /li= link_to "#{question.body}", question_path(question)
 
 
 
