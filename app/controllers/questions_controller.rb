@@ -1,26 +1,21 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit update destroy create]
   before_action :load_question, only: %i[show edit update destroy]
-
+  before_action :build_answer, only: %i[show]
   after_action :publish_question, only: [:create]
 
+  respond_to :html
+
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def show
-    @answers = @question.answers
-    @answers = @answers.order(position: :asc)
-    @answer = Answer.new
-    @comment = @answer.comments.new
-    @vote = Vote.new
-    @answer.attachments.build
-
+    respond_with @question
   end
 
   def new
-    @question = Question.new
-    @question.attachments.build
+    respond_with (@question = Question.new)
   end
 
   def edit
@@ -29,28 +24,32 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(questions_params)
     @question.user_id = current_user.id
-    if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
-    else
-      render :new
-    end
-
+    flash[:notice] = 'Your question successfully created.' if @question.save
+    respond_with @question
   end
 
   def update
     @question.update(questions_params)
+    respond_with @question
   end
 
   def destroy
     if current_user.id == @question.user_id
-      @question.destroy
-      redirect_to questions_path, notice: 'Your question successfully destroyed.'
+      flash[:notice] = 'Your question successfully destroyed.'
+      respond_with(@question.destroy)
     else
       redirect_to questions_path, notice: 'Your can`t destroy not your question.'
     end
   end
 
   protected
+
+  def build_answer
+    @answers = @question.answers.order(position: :asc)
+    @answer = Answer.new
+    @comment = @answer.comments.new
+    @vote = Vote.new
+  end
 
   def publish_question
     return if @question.errors.any?

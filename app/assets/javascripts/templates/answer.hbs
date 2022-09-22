@@ -1,6 +1,6 @@
 <div id="answer-{{answer.id}}">
   <div class="answer-body"><li>{{answer.body}}</li></div>
-  {{#each attachments}}
+  {{#each files}}
     <div class="file-{{this.id}}">
       <a href="{{this.url}}">{{this.name}}</a>
       {{#if ../is_answer_owner}}

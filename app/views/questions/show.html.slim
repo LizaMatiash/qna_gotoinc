@@ -39,7 +39,7 @@
       = f.label :body
       = f.text_area :body
     p
-      = f.fields_for :attachments do |a|
+      = f.fields_for :attachments, @answer.attachments.build do |a|
         = link_to_add_association 'add', f , :attachments
     p= f.submit 'Add answer'
 .question
