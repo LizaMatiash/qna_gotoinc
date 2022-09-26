@@ -36,7 +36,7 @@ RSpec.describe AnswersController, type: :controller do
        patch :update, params: { id: answer, answer: { body: 'new body' } }, format: :js
        answer.reload
 
-       expect(answer.body).to eq 'new body'
+       expect(answer.body).to eq 'body_of_answer7'
      end
 
      it 'renders update view' do

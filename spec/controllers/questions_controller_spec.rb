@@ -32,9 +32,6 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
-    it 'assigns a new attachment to @answer' do
-      expect(assigns(:answer).attachments.first).to be_a_new(Attachment)
-    end
 
     it 'renders show view' do
       expect(response).to render_template :show
@@ -47,10 +44,6 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
-    end
-
-    it 'assigns a new attachment to @question' do
-      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
     end
 
     it 'renders new view' do
@@ -99,12 +92,12 @@ RSpec.describe QuestionsController, type: :controller do
     before { login(user) }
     context 'with valid attributes' do
       it 'assigns the requested question to @question' do
-        patch :update, params: {id: question, question: attributes_for(:question) }, format: :js
+        patch :update, params: {id: question, question: attributes_for(:question) }
         expect(assigns(:question)).to eq question
       end
 
       it 'change question attributes' do
-        patch :update, params: {id: question, question: { title: 'new title', body: 'new body' } }, format: :js
+        patch :update, params: {id: question, question: { title: 'new title', body: 'new body' } }
         question.reload
 
         expect(question.title).to eq 'new title'
@@ -112,14 +105,14 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 'redirect to updated question' do
-        patch :update, params: {id: question, question: attributes_for(:question) }, format: :js
+        patch :update, params: {id: question, question: attributes_for(:question) }
 
         expect(response).to redirect_to assigns(:question)
       end
     end
 
     context 'with invalid attributes' do
-      before { patch :update, params: {id: question, question: attributes_for(:question, :invalid) }, format: :js }
+      before { patch :update, params: {id: question, question: attributes_for(:question, :invalid) }}
       it 'does not change question' do
         question.reload
 

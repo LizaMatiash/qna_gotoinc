@@ -14,14 +14,14 @@ feature 'Add files to answer', %(
     click_on question.body
   end
 
-  scenario 'Authenticated user creates answer', js: true do
+  scenario 'Authenticated user creates answer' do
     fill_in 'Body', with: 'My answer'
+    click_link 'add'
     attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
     click_on 'Add answer'
 
-    within('.answers') do
-      expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/1/rails_helper.rb'
-    end
+    expect(page).to have_content 'rails_helper.rb'
+
   end
 
 

@@ -29,17 +29,17 @@ div class = "answer-#{answer.id}"
   - if @question.user == current_user && answer.position != 1
     p= link_to 'Best', position_answer_path(answer), class: 'best-answer-link', data: { answer_id: answer.id }, remote: true
 
-.answer-comments
-  h3 ="Comments for answer: "
-  -answer.comments.each do |comment|
-    p= comment.body
+  .answer-comments
+    h3 ="Comments for answer: "
+    -answer.comments.each do |comment|
+      p= comment.body
 
-  .answer-comments-error
+    .answer-comments-error
 
 
-.answer-comments-form
-  = form_for [@comment], url: comments_url(resource_id: answer, resource: 'Answer'), remote: true do |fc|
-    p class = 'comment_body'
-      = fc.label :body, 'Add your comments for answer'
-      = fc.text_area :body
-    p= fc.submit 'Add comment'
+  .answer-comments-form
+    = form_for [@comment], url: comments_url(resource_id: answer, resource: 'Answer'), remote: true do |fc|
+      p class = 'comment_body'
+        = fc.label :body, 'Add your comments for answer'
+        = fc.text_area :body
+      p= fc.submit 'Add comment'
