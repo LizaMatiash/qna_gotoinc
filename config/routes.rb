@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get '/users/email_get', to: 'users#email_get', as: 'users_email_get'
+  post '/users/email_post', to: 'users#email_post', as: 'users_email_post'
+  devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :questions do
     resources :answers, shallow: true do
