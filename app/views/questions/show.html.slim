@@ -43,5 +43,5 @@
         = link_to_add_association 'add', f , :attachments
     p= f.submit 'Add answer'
 .question
-  - if @question.user == current_user
+  - if can? :destroy, @question
     p= link_to 'Destroy', @question, method: :delete, local: true

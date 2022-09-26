@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
 
   respond_to :html
 
-  # authorize_resource
+  authorize_resource
 
   def index
     # authorize! :read, Question

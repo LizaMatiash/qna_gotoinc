@@ -6,11 +6,11 @@
     - @question.attachments.each do |a|
         div class = "file-#{a.id}"
           li= link_to a.file.identifier, a.file.url
-          - if question.user == current_user
+          - if can? :destroy, question
             li= link_to 'Destroy file', attachment_path(a), method: :delete, remote: true, class: 'destroy-file', data: { file_id: a.id }
 
 
-  - if @question.user == current_user
+  - if can? :update, question
     = form_for [question], remote: true, class: 'hidden' do |f|
       = f.label :title, 'Edit your title: '
       = f.text_field :title
