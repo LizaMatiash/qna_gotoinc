@@ -11,6 +11,18 @@
     p= link_to 'vote_down', votes_down_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
     p= link_to 'vote_cancel', votes_cancel_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'cancel-vote', data: { type: :json }
 
+.question-comments
+  h3= "Comments for question: "
+  -@question.comments.each do |comment|
+    p= comment.body
+.question-comments-error
+  = render 'common/errors', resource: @comment
+.question-comments-form
+    = form_for [@comment], url: comments_url(resource_id: @question, resource: 'Question'), remote: true do |f|
+        p class = 'comment_body'
+          = f.label :body, 'Add your comments for question'
+          = f.text_area :body
+        p= f.submit 'Add comment'
 
 .answers
   ul

@@ -33,6 +33,9 @@ gem 'jquery-rails'
 gem 'carrierwave'
 gem "cocoon"
 
+gem 'gon'
+gem 'handlebars_assets'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

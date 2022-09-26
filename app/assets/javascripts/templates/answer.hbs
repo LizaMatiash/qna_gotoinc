@@ -1,0 +1,34 @@
+<div id="answer-{{answer.id}}">
+  <div class="answer-body"><li>{{answer.body}}</li></div>
+  {{#each attachments}}
+    <div class="file-{{this.id}}">
+      <a href="{{this.url}}">{{this.name}}</a>
+      {{#if ../is_answer_owner}}
+        <a href="/attachments/{{this.id}} data-remote="true" data-method="delete" rel="nofollow"" >Destroy file</a>
+      {{/if}}
+      </div>
+  {{/each}}
+
+  <div class="answer_vote">
+    <p class="rating">Rating: {{rating}}</p>
+    {{#if is_not_answer_owner}}
+      <p><a class="new-vote" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="post" type=answer">vote_up</a></p>
+      <p></p><a class="new-vote" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="post" type=answer">vote_down</a></p>
+      <p></p><a class="cancel-vote" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="post" type=answer">vote_cancel</a></p>
+    {{/if}}
+  </div>
+
+  {{#if is_answer_owner}}
+    <a local="true" rel="nofollow" data-method="delete" href="/answers/{{answer.id}}">Destroy</a>
+    <a class="edit-answer-link" data-answer-id="{{answer.id}}" href="#">Edit</a>
+  {{/if}}
+
+  {{#if is_question_owner}}
+    <p><a class="best-answer-link" data-answer-id="{{answer.id}}" data-remote="true" rel="nofollow" data-method="post" href="/answers/{{answer.id}}/best">The Best</a></p>
+
+  {{/if}}
+
+
+
+
+</div>

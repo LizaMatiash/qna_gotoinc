@@ -2,7 +2,7 @@ class Question < ApplicationRecord
   include HasVote
   has_many :answers, dependent: :destroy
   has_many :attachments, as: :attachmentable
-  # has_many :votes, dependent: :destroy, as: :votable
+  has_many :comments, dependent: :destroy, as: :commentable
   belongs_to :user
   validates :title, :body, presence: true
 

@@ -1,15 +1,15 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
+  after_action :publish_answer, only: [:create]
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
     @answer.user_id = current_user.id
     @answer.position = 2
     @answer.save
+    @comment = @answer.comments.new
 
-    # respond_to do |format|
-    #   format.html { render partial: @answer, layout: false }
-    # end
   end
 
   def update
@@ -48,6 +48,29 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def publish_answer
+   return if @answer.errors.any?
+   gon.question_id = @answer.question_id
+   gon.user_id = current_user.id
+   gon.question_owner_id = @answer.question.user_id
+   @files = []
+   @answer.attachments.each do |file|
+     @files << {name: file.filename.to_s, url: url_for(file), id: file.id}
+
+   end
+   ActionCable.server.broadcast(
+     "question_#{@question.id}",
+     {
+       type: 'answer',
+       answer: @answer,
+       files: @files,
+       rating: @answer.rating()
+     }
+   )
+ end
+
+
   def answer_params
     params.require(:answer).permit(:body, attachments_attributes: [:file])
 
