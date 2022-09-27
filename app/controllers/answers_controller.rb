@@ -5,6 +5,7 @@ class AnswersController < ApplicationController
   # before_action :load_question_answers, only: i%[u]
   after_action :publish_answer, only: [:create]
 
+  authorize_resource
 
 
   def create
