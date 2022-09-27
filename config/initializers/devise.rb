@@ -1,13 +1,6 @@
 # frozen_string_literal: true
 
-# Assuming you have not yet modified this file, each configuration option below
-# is set to its default value. Note that some are commented out while others
-# are not: uncommented lines are intended to protect your configuration from
-# breaking changes in upgrades (i.e., in the event that future versions of
-# Devise change the default values for those options).
-#
-# Use this hook to configure devise mailer, warden hooks and so forth.
-# Many of these configuration options can be set straight in your model.
+
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
@@ -271,7 +264,19 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  # config.omniauth :github,
+  #     Rails.application.credentials[Rails.env.to_sym][:github][:id],
+  #     Rails.application.credentials[Rails.env.to_sym][:github][:secret],
+  #     scope: 'user:email, read:user'
+
+  config.omniauth :github,
+      Rails.application.credentials[:github][Rails.env.to_sym][:id],
+      Rails.application.credentials[:github][Rails.env.to_sym][:secret],
+      scope: 'user:email, read:user'
+
+  config.omniauth :twitter,
+      Rails.application.credentials[:twitter][Rails.env.to_sym][:id],
+      Rails.application.credentials[:twitter][Rails.env.to_sym][:secret]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
