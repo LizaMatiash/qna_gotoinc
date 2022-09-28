@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'cancan/matchers'
 
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -33,6 +34,9 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+  FactoryBot::SyntaxRunner.class_eval do
+    include ActionDispatch::TestProcess::FixtureFile
+  end
 end
 
 Capybara.register_driver :chrome do |app|
@@ -53,7 +57,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
-  # config.include ApiHelpers, type: :request
+  config.include ApiHelpers, type: :request
   # config.include OmniauthHelpers, type: :feature
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   OmniAuth.config.test_mode = true

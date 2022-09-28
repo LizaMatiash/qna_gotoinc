@@ -50,6 +50,11 @@ gem 'cancancan'
 # l12
 gem 'doorkeeper', '~> 4.2.6'
 
+# l13
+gem 'active_model_serializers'
+gem 'oj'
+gem 'oj_mimic_json'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
