@@ -6,6 +6,8 @@ class Question < ApplicationRecord
   belongs_to :user
   validates :title, :body, presence: true
 
+  after_create :rating
+
   # scope :rating, ->(question) { Vote.where(votable_id: question).inject (0) { |sum, vote| sum + vote.votes} }
 
   accepts_nested_attributes_for :attachments
