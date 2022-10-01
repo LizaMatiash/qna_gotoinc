@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_27_102833) do
+ActiveRecord::Schema.define(version: 2022_10_01_085341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,21 @@ ActiveRecord::Schema.define(version: 2022_09_27_102833) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at", precision: 6
+    t.datetime "updated_at", precision: 6
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -104,6 +119,15 @@ ActiveRecord::Schema.define(version: 2022_09_27_102833) do
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
+  create_table "subscribe_lists", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "question_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_subscribe_lists_on_question_id"
+    t.index ["user_id"], name: "index_subscribe_lists_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -135,4 +159,6 @@ ActiveRecord::Schema.define(version: 2022_09_27_102833) do
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "questions", "users"
+  add_foreign_key "subscribe_lists", "questions"
+  add_foreign_key "subscribe_lists", "users"
 end

@@ -19,6 +19,8 @@ class Ability
           votable.user_id != user.id
         end
         can :destroy, ActiveStorage::Attachment, record: { user: user }
+        can :subscribe, Question
+        can :unsubscribe, Question
 
       end
     else

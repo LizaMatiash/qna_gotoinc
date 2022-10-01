@@ -9,6 +9,12 @@
           - if can? :destroy, question
             li= link_to 'Destroy file', attachment_path(a), method: :delete, remote: true, class: 'destroy-file', data: { file_id: a.id }
 
+    p
+      - if user_signed_in?
+        - if @question.has_subscribed?(current_user)
+          = link_to 'Unsubscribe', unsubscribe_question_path(@question), method: :post
+        - else
+          = link_to 'Subscribe', subscribe_question_path(@question), method: :post
 
   - if can? :update, question
     = form_for [question], remote: true, class: 'hidden' do |f|

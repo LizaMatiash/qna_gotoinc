@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit update destroy create]
-  before_action :load_question, only: %i[show edit update destroy]
+  before_action :load_question, only: %i[show edit update destroy subscribe unsubscribe]
   before_action :build_answer, only: %i[show]
   after_action :publish_question, only: [:create]
 
@@ -43,6 +43,16 @@ class QuestionsController < ApplicationController
     else
       redirect_to questions_path, notice: 'Your can`t destroy not your question.'
     end
+  end
+
+  def subscribe
+    @question.subscribe(current_user)
+    redirect_to @question, notice: 'Subscribed successfully!'
+  end
+
+  def unsubscribe
+    @question.unsubscribe(current_user)
+    redirect_to @question, notice: 'Unsubscribed successfully!'
   end
 
   protected

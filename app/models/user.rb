@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
+  has_many :subscribe_lists, dependent: :destroy
+  has_many :subscriptions, class_name: 'Question', through: :subscribe_lists 
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -31,7 +33,11 @@ class User < ApplicationRecord
     user
   end
 
-
+  def self.send_daily_digest
+    find_each.each do |user|
+      DailyMailer.delay.digest(user)
+    end
+  end
 
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid)
