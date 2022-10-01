@@ -57,6 +57,7 @@ RSpec.configure do |config|
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
   config.include ApiHelpers, type: :request
+
   # config.include OmniauthHelpers, type: :feature
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   OmniAuth.config.test_mode = true
