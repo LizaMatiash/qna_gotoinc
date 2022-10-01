@@ -61,6 +61,13 @@ gem 'oj_mimic_json'
 gem 'sidekiq', '~> 4.2.9'
 gem 'whenever', '0.7.0', :require => false
 
+# l15
+gem 'mysql2', '~> 0.4.10'
+gem "thinking-sphinx",
+  :git    => "https://github.com/pat/thinking-sphinx.git",
+  :branch => "develop",
+  :ref    => "d1e3603c9e"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

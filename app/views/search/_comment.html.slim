@@ -1,0 +1,4 @@
+div
+  = "Comment of #{comment.user.email}"
+  ul
+    = truncate(comment.body, length: 200)

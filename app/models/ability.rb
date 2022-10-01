@@ -11,6 +11,7 @@ class Ability
         can :manage, :all
       else
         can :read, :all
+        can :search, :all
         can :create, [Question, Answer, Comment]
         can :update, [Question, Answer, Comment], user: user
         can :destroy, [Question, Answer, Comment], user: user
@@ -25,6 +26,7 @@ class Ability
       end
     else
       can :read, :all
+      can :search, :all 
       can :email_get, User
       can :email_post, User
     end

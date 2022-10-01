@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   post '/votes/votes_up', to: 'votes#votes_up', as: 'votes_up'
   post '/votes/votes_cancel', to: 'votes#votes_cancel', as: 'votes_cancel'
 
+  get 'search', to: 'search#search'
+
   root to: "questions#index"
 
   mount ActionCable.server => '/cable'
