@@ -31,7 +31,7 @@ gem 'devise'
 gem 'jquery-rails'
 
 gem 'carrierwave'
-gem "cocoon"
+gem 'cocoon'
 
 gem 'gon'
 gem 'handlebars_assets'
@@ -46,6 +46,10 @@ gem 'omniauth-twitter'
 
 # l11
 gem 'cancancan'
+
+
+# l12
+gem 'doorkeeper', '~> 4.2.6'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -82,6 +86,7 @@ group :test do
   gem 'webdrivers'
   gem 'shoulda-matchers'
   gem 'launchy'
+  gem 'json_spec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
