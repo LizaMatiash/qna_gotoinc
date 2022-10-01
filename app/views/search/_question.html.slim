@@ -1,0 +1,4 @@
+div
+  = "Question of #{question.user.email}"
+  ul
+    p= link_to question.title, question_path(question)

@@ -1,0 +1,4 @@
+div
+  = "Answer of #{answer.user.email}"
+  ul
+    = truncate(answer.body, length: 200)
