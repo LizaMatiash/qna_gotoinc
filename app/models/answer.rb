@@ -5,6 +5,8 @@ class Answer < ApplicationRecord
   has_many :attachments, as: :attachmentable
   has_many :comments, dependent: :destroy, as: :commentable
 
+  after_create :rating
+
   validates :body, presence: true
 
   accepts_nested_attributes_for :attachments

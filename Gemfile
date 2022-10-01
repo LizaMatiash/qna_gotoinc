@@ -92,6 +92,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'json_spec'
+  gem 'rspec-its'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
