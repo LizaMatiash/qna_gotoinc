@@ -70,7 +70,7 @@ gem "thinking-sphinx",
 
 # l20
 gem 'dotenv'
-gem 'dotenv-deployment', require: 'dotenv/deployment'
+gem 'dotenv-rails'
 gem 'therubyracer'
 
 # Reduces boot times through caching; required in config/boot.rb
