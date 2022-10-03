@@ -270,13 +270,13 @@ Devise.setup do |config|
   #     scope: 'user:email, read:user'
 
   config.omniauth :github,
-      Rails.application.credentials[:github][Rails.env.to_sym][:id],
-      Rails.application.credentials[:github][Rails.env.to_sym][:secret],
+      Rails.application.secrets[:git_id],
+      Rails.application.secrets[:git_secret],
       scope: 'user:email, read:user'
-
-  config.omniauth :twitter,
-      Rails.application.credentials[:twitter][Rails.env.to_sym][:id],
-      Rails.application.credentials[:twitter][Rails.env.to_sym][:secret]
+  # #
+  # config.omniauth :twitter,
+  #     Rails.application.secrets[:twitter][Rails.env.to_sym][:id],
+  #     Rails.application.secrets[:twitter][Rails.env.to_sym][:secret]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
