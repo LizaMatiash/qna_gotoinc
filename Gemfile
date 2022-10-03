@@ -105,6 +105,7 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-passenger'
+  gem 'capistrano-secrets-yml'
   gem 'highline'
 
 end
