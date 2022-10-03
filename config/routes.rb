@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :questions do
+    post :subscribe, on: :member
+    post :unsubscribe, on: :member
     resources :answers, shallow: true do
       member do
         get 'position'

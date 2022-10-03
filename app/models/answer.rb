@@ -5,10 +5,16 @@ class Answer < ApplicationRecord
   has_many :attachments, as: :attachmentable
   has_many :comments, dependent: :destroy, as: :commentable
 
-  after_create :rating
-
   validates :body, presence: true
 
   accepts_nested_attributes_for :attachments
-  # accepts_nested_attributes_for :votes, reject_if: :all_blank
+
+  after_create :rating
+  after_create :report_subscribers
+
+  private
+
+  def report_subscribers
+    ReportSubscribersJob.perform_later(self)
+  end
 end

@@ -56,6 +56,11 @@ gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
 
+# l14
+# gem 'delayed_job_active_record'
+gem 'sidekiq', '~> 4.2.9'
+gem 'whenever', '0.7.0', :require => false
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

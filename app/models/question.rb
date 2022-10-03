@@ -4,12 +4,33 @@ class Question < ApplicationRecord
   has_many :attachments, as: :attachmentable
   has_many :comments, dependent: :destroy, as: :commentable
   belongs_to :user
+  has_many :subscribe_lists, dependent: :destroy
+  has_many :subscribers, class_name: 'User', through: :subscribe_lists
+
   validates :title, :body, presence: true
 
+  accepts_nested_attributes_for :attachments
+
+  scope :created_yesterday, -> { where(created_at: Time.zone.now.yesterday.all_day) }
+
+  after_create :subscribe_author
   after_create :rating
 
-  # scope :rating, ->(question) { Vote.where(votable_id: question).inject (0) { |sum, vote| sum + vote.votes} }
+  def subscribe(user)
+    self.subscribers << user unless has_subscribed? user
+  end
 
-  accepts_nested_attributes_for :attachments
-  # accepts_nested_attributes_for :votes, reject_if: :all_blank
+  def unsubscribe(user)
+    self.subscribers.delete(user) if has_subscribed? user
+  end
+
+  def has_subscribed?(user)
+    subscribers.include? user
+  end
+
+  private
+
+  def subscribe_author
+    subscribe(user)
+  end
 end

@@ -52,7 +52,10 @@ describe Ability do
 
     it { should be_able_to :votes_up, question }
     it { should be_able_to :votes_down, question }
-    
+
+    it { should be_able_to :subscribe, question }
+    it { should be_able_to :unsubscribe, question }
+
     it { should be_able_to :destroy, ActiveStorage::Attachment, record: { user: user } }
   end
 
