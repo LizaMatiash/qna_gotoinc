@@ -106,6 +106,9 @@ GEM
     capistrano-secrets-yml (1.2.1)
       capistrano (>= 3.10)
       sshkit (>= 1.17.0)
+    capistrano-sidekiq (1.0.3)
+      capistrano (>= 3.9.0)
+      sidekiq (>= 3.4, < 6.0)
     capybara (3.37.1)
       addressable
       matrix
@@ -441,6 +444,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   capistrano-secrets-yml
+  capistrano-sidekiq
   capybara (>= 3.26)
   capybara-email
   carrierwave
