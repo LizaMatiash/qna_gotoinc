@@ -59,7 +59,7 @@ gem 'oj_mimic_json'
 # l14
 # gem 'delayed_job_active_record'
 gem 'sidekiq', '~> 4.2.9'
-gem 'whenever', '0.7.0'
+gem 'whenever', :require => false
 
 # l15
 gem 'mysql2', '~> 0.4.10'
