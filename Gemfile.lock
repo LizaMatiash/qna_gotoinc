@@ -176,7 +176,6 @@ GEM
       sprockets (>= 2.0.0)
       tilt (>= 1.2)
     hashie (5.0.0)
-    highline (2.0.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -453,7 +452,6 @@ DEPENDENCIES
   factory_bot_rails
   gon
   handlebars_assets
-  highline
   jbuilder (~> 2.7)
   jquery-rails
   json_spec
