@@ -1,47 +1,50 @@
+
 .question-errors
   = render 'common/errors', resource: @question
 
 = render @question
 
-.question_vote
-    p class = "rating"
-      = "Rating: #{ @question.rating() }"
-    p class = 'rating-error'
-    p= link_to 'vote_up', votes_up_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
-    p= link_to 'vote_down', votes_down_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
-    p= link_to 'vote_cancel', votes_cancel_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'cancel-vote', data: { type: :json }
+- cache @question do
 
-.question-comments
-  h3= "Comments for question: "
-  -@question.comments.each do |comment|
-    p= comment.body
-.question-comments-error
-  = render 'common/errors', resource: @comment
-.question-comments-form
-    = form_for [@comment], url: comments_url(resource_id: @question, resource: 'Question'), remote: true do |f|
-        p class = 'comment_body'
-          = f.label :body, 'Add your comments for question'
-          = f.text_area :body
-        p= f.submit 'Add comment'
+  .question_vote
+      p class = "rating"
+        = "Rating: #{ @question.rating() }"
+      p class = 'rating-error'
+      p= link_to 'vote_up', votes_up_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
+      p= link_to 'vote_down', votes_down_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'new-vote', data: { type: :json }
+      p= link_to 'vote_cancel', votes_cancel_url(id: @question.id, type: 'question'), method: :post, remote: true, class: 'cancel-vote', data: { type: :json }
 
-.answers
-  ul
-  - @answers.each do |ans|
-    = render ans
-/  = render @question.answers
+  .question-comments
+    h3= "Comments for question: "
+    -@question.comments.each do |comment|
+      p= comment.body
+  .question-comments-error
+    = render 'common/errors', resource: @comment
+  .question-comments-form
+      = form_for [@comment], url: comments_url(resource_id: @question, resource: 'Question'), remote: true do |f|
+          p class = 'comment_body'
+            = f.label :body, 'Add your comments for question'
+            = f.text_area :body
+          p= f.submit 'Add comment'
 
-.answer-errors
-  = render 'common/errors', resource: @answer
+  .answers
+    ul
+    - @answers.each do |ans|
+      = render ans
+  /  = render @question.answers
 
-.new-answer
-  = form_for [@question, @answer], class: 'new-answer', remote: true do |f|
-    p
-      = f.label :body
-      = f.text_area :body
-    p
-      = f.fields_for :attachments, @answer.attachments.build do |a|
-        = link_to_add_association 'add', f , :attachments
-    p= f.submit 'Add answer'
-.question
-  - if can? :destroy, @question
-    p= link_to 'Destroy', @question, method: :delete, local: true
+  .answer-errors
+    = render 'common/errors', resource: @answer
+
+  .new-answer
+    = form_for [@question, @answer], class: 'new-answer', remote: true do |f|
+      p
+        = f.label :body
+        = f.text_area :body
+      p
+        = f.fields_for :attachments, @answer.attachments.build do |a|
+          = link_to_add_association 'add', f , :attachments
+      p= f.submit 'Add answer'
+  .question
+    - if can? :destroy, @question
+      p= link_to 'Destroy', @question, method: :delete, local: true

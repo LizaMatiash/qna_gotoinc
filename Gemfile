@@ -70,6 +70,9 @@ gem 'listen', '~> 3.3'
 # l 21
 gem 'unicorn'
 
+# l22
+gem 'redis-rails'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

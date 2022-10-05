@@ -1,15 +1,9 @@
 .question-list
   ul
-    - @questions.each do |question|
-      li
-        = render 'questions/index', question: question
-
-        /'questions/index', question
-
-        /h2= question.title
-        /li= link_to "#{question.body}", question_path(question)
-
-
+    - cache collection_cache_key_for :question do
+      - @questions.each do |question|
+        li
+          = render 'questions/index', question: question
 
   p= link_to 'Ask question', new_question_path
 
