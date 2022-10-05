@@ -17,13 +17,6 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
 gem 'slim-rails'
 
 gem 'devise'
@@ -59,7 +52,7 @@ gem 'oj_mimic_json'
 # l14
 # gem 'delayed_job_active_record'
 gem 'sidekiq', '~> 4.2.9'
-gem 'whenever', :require => false
+gem 'whenever', require: false
 
 # l15
 gem 'mysql2', '~> 0.4.10'
@@ -73,6 +66,9 @@ gem 'dotenv'
 gem 'dotenv-rails'
 gem 'therubyracer'
 gem 'listen', '~> 3.3'
+
+# l 21
+gem 'unicorn'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -105,7 +101,8 @@ group :development do
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-sidekiq', require: false
-  gem 'capistrano-secrets-yml'
+  gem 'capistrano-secrets-yml', require: false
+  gem 'capistrano3-unicorn', require: false
   gem 'highline'
 
 end
