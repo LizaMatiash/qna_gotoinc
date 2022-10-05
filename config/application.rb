@@ -33,13 +33,9 @@ module Qna
     end
 
     config.active_job.queue_adapter = :sidekiq
-    # config.eager_load_paths += %W(#{config.root}/app/indices/answers_index.rb)
-    # config.eager_load_paths += %W(#{config.root}/app/indices/comments_index.rb)
-    # config.eager_load_paths += %W(#{config.root}/app/indices/questions_index.rb)
-    # config.eager_load_paths += %W(#{config.root}/app/indices/users_index.rb)
+
     config.autoload_paths += %W(#{config.root}/app/indices/)
-    # config.autoload_paths += %W(#{config.root}/app/serializers/)
-    # config.autoload_paths += %W(#{config.root}/app/indices/answers_index.rb)
-    # byebug
+g
+    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expipres_in: 60.minutes }
   end
 end
